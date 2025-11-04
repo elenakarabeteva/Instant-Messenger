@@ -1,15 +1,9 @@
 import * as express from 'express';
-import {User} from '../models/user';
+import {getAllUsers, getUsersFromAChannel} from '../controllers/usersController';
 
-const users: express.Router = express.Router();
+const usersRouter: express.Router = express.Router();
 
-users.get('/', async (request: express.Request, response: express.Response) => {
-    try{
-        const usersInfo = await User.find();
-        response.status(200).json(usersInfo); 
-    } catch (error) {
-        response.status(500).json({ error: 'Error fetching users' });
-    }
-});
+usersRouter.get('/', getAllUsers);
+usersRouter.get('/:channelId', getUsersFromAChannel);
 
-export default users;
+export default usersRouter;

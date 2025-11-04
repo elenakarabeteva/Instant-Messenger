@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import styles from "./profile.module.scss";
 
 const Profile = () => {
   // 1. Call the hook at the top‐level of your component:
@@ -15,11 +16,22 @@ const Profile = () => {
   };
 
   return (
-    <div className="form-box">
-      <h2>Welcome, {user?.name || "Guest"}</h2>
-      <p>Username: {user?.username || "-"}</p>
-      <p>Email: {user?.email || "-"}</p>
-      <button onClick={handleLogout}>Logout</button>
+    <div className={styles.container}> 
+      <div className={styles['left-panel']}>
+      </div>
+      <div className={styles['right-panel']}>
+        <div className={styles['form-box']}>
+          <h2>Welcome, {user?.name || "Guest"}</h2>
+          <p>Username: {user?.username || "-"}</p>
+          <p>Email: {user?.email || "-"}</p>
+          <div className={styles['button-group']}>
+            <button className={styles.logout} onClick={handleLogout}>Logout</button>
+            <button className={styles.chats} onClick={() => navigate("/chat")}>Chats</button>
+          </div>
+          
+        </div>
+    </div>
+      
     </div>
   );
 };

@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# Instant Messenger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time chat application built with a Node.js/TypeScript backend and a React frontend. It leverages Socket.IO for bi-directional communication, allowing users to join channels, send messages, and manage profiles seamlessly.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+* **Real-time Messaging:** Instant delivery of messages using Socket.IO.
+* **Channels:** Create, join, and list chat channels.
+* **User Profiles:** Register, login, and view user profiles.
+* **Persistence:** Messages and user data stored in a database (e.g., MongoDB).
+* **Responsive UI:** Built with Create React App and styled with SCSS modules.
 
-### `npm start`
+## 📁 Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+Instant-Messenger/
+├── client/                  # React frontend
+│   ├── public/              # Static files
+│   ├── src/                 # React source code
+│   │   ├── components/      # UI components
+│   │   │   ├── chat/        # Chat interfaces (ChatWindow, ChannelModal)
+│   │   │   ├── login/       # Login form
+│   │   │   └── profile/     # User profile view
+│   │   ├── App.js           # Root React component
+│   │   └── index.js         # Frontend entry point
+│   ├── package.json         # Frontend dependencies and scripts
+│   └── README.md            # CRA-generated README
+├── server/                  # Node.js/TypeScript backend
+│   ├── src/                 # Server source code
+│   │   ├── controllers/     # Route handlers for users, channels, messages
+│   │   ├── models/          # Data models (User, Channel, Message)
+│   │   ├── socketio.ts      # Socket.IO setup
+│   │   └── index.ts         # Backend entry point
+│   ├── tsconfig.json        # TypeScript configuration
+│   ├── package.json         # Backend dependencies and scripts
+│   └── .env                 # Environment variables (e.g., DB URI, PORT)
+├── .gitignore               # Ignored files
+└── README.md                # This file
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technologies
 
-### `npm test`
+* **Frontend:** React, Create React App, SCSS Modules
+* **Backend:** Node.js, Express, TypeScript, Socket.IO
+* **Database:** MongoDB (via Mongoose)
+* **Tooling:** ESLint, Prettier, ts-node-dev
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ Installation
 
-### `npm run build`
+1. **Clone the repository**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   git clone https://github.com/your-username/instant-messenger.git
+   cd instant-messenger
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Setup the Server**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   cd server
+   npm install
+   # Create a .env file with your environment variables:
+   #   MONGO_URI=<your-mongodb-uri>
+   #   PORT=5000
+   npm run dev
+   ```
 
-### `npm run eject`
+3. **Setup the Client**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   cd ../client
+   npm install
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Open in Browser**
+   Navigate to `http://localhost:3000` to use the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📝 API Endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Route                 | Method | Description                |
+| --------------------- | ------ | -------------------------- |
+| `/api/users/register` | POST   | Register a new user        |
+| `/api/users/login`    | POST   | Login and retrieve JWT     |
+| `/api/channels`       | GET    | Get list of channels       |
+| `/api/channels`       | POST   | Create a new channel       |
+| `/api/messages`       | GET    | Get messages for a channel |
 
-## Learn More
+## 🤝 Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contributions are welcome! Please follow these steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/my-feature`).
+3. Commit your changes (`git commit -m 'Add my feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Open a Pull Request.
 
-### Code Splitting
+Please ensure your code follows existing style and includes tests where applicable.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📄 License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.

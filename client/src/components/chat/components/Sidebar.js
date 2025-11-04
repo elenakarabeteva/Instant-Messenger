@@ -1,5 +1,5 @@
-// src/components/Sidebar.js
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './sidebar.module.scss';
 
 export default function Sidebar({
     channels,
@@ -10,48 +10,49 @@ export default function Sidebar({
     selectedUser,
     onSelectUser,
 }) {
+    const navigate = useNavigate();
+
     return (
-        <div className="sidebar">
+        <div className={styles.sidebar}>
             {/* Първа секция: Public channels */}
             <div style={{ marginBottom: '20px' }}>
-                <div className="logo">ChatApp</div>
-                <ul className="channel-list">
-                    {channels.map((ch) => (
+                <div className={styles.logo}>ChatApp</div>
+                <ul className={styles['channel-list']}>
+                    {channels.filter(ch => ch.user_list.length > 2).map((ch) => (
                         <li
-                            key={ch.id}
-                            className={currentChannel === ch.id ? 'active' : ''}
+                            key={ch._id}
+                            className={currentChannel === ch._id ? 'active' : ''}
                             onClick={() => {
-                                onSelectChannel(ch.id);
+                                onSelectChannel(ch._id);
                             }}
                         >
-                            {ch.label}
+                            {ch.name}
                         </li>
                     ))}
                 </ul>
             </div>
 
-            {/* Втора секция: Private users */}
-            <div style={{ borderTop: '1px solid #444', paddingTop: '20px' }}>
-                <div style={{ color: '#ccc', fontSize: '14px', marginBottom: '8px' }}>
+            <div>
+                <div>
                     Потребители
                 </div>
-                <ul className="channel-list">
+                <ul className={styles['channel-list']}>
                     {users
-                        .filter((u) => u !== currentUser)
-                        .map((username) => (
+                        .filter((u) => u.username !== currentUser.username)
+                        .map((user, i) => (
                             <li
-                                key={username}
-                                className={selectedUser === username ? 'active' : ''}
+                                key={i}
+                                className={selectedUser === user.username ? 'active' : ''}
                                 onClick={() => {
-                                    onSelectUser(username);
+                                    onSelectUser(user);
                                 }}
                             >
-                                {username}
+                                {user.name}
                             </li>
                         ))}
                 </ul>
-                <div style={{ marginTop: 'auto', color: '#aaa', fontSize: '12px' }}>
-                    Влязъл: <strong>{currentUser}</strong>
+                <div onClick={() => navigate('/profile')}>
+                    Влязъл: <strong>{currentUser.name}</strong>
                 </div>
             </div>
         </div>
